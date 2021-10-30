@@ -1,0 +1,1 @@
+export { default as jsonVehicle } from './templates/jsonVehicle'

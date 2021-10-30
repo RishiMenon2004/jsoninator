@@ -1,0 +1,51 @@
+@import 'src/resources/sass/colours';
+
+@mixin button($background: $secondary, $color: $fcolor) {
+    background-color: $background;
+    border: none;
+    color: $color;
+    // width: clamp(3em, 3em, 6em);
+    padding: 0.125em 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin scale_hover($margin: 0) {
+    transition: transform 250ms, margin 500ms;
+    transform-origin: left;
+    margin: 0;
+
+    &:hover, &:focus {
+        transform: scale(1.1);
+        margin: $margin 0;
+    }
+}
+
+@mixin outline_hover($color, $is-focus-within, $is-negative) {
+    outline: 0 solid $color;
+    
+    @if $is-negative {
+        outline-offset: calc(-1em/10);
+    } @else {
+        outline-offset: calc(1em/10);
+    }
+
+    @if $is-focus-within {
+        &:focus, &:focus-within {
+            outline-width: calc(1em/8);
+        }
+    } @else {
+        &:hover, &:focus {
+            outline-width: calc(1em/8);
+        }
+    }
+}
+
+
+
+@mixin press_darken {
+    &:active {
+        filter: brightness(1.1);
+    }
+}

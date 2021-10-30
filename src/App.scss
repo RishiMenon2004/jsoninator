@@ -1,0 +1,107 @@
+@import './resources/sass/global_variables.scss';
+@import './resources/sass/colours.scss';
+@import 'src/resources/sass/inputs_buttons';
+
+.flex { display: flex; }
+
+.center-vert { align-items: center; } 
+
+.App-header {
+
+  background-color: $secondary;
+  color: $fcolor;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: sticky;
+  border-radius: 0 0 0.5rem 0.5rem;
+  top: 0;
+  z-index: 1;
+  height: 3rem;
+
+  & .button {
+    border-radius: 0.5rem;
+  }
+
+}
+
+.main {
+
+  height: calc(100% - 3rem);
+
+  overflow-y: scroll;
+
+  padding: 2rem;
+
+  .button {
+    // @include scale_hover();
+    @include press_darken;
+  }
+
+}
+
+.dropdown {
+
+  --button-margin: 0.25em;
+
+  font-size: 1.125rem;
+
+  text-align: center;
+  position: relative;
+
+  &.button {
+
+    @include button;
+    margin: var(--button-margin);
+    padding: 0.25em 1.5em;
+    @include outline_hover($primary, $is-focus-within: true, $is-negative: false);
+
+    &:hover, &:focus {
+      background-color: hsl(0, 0%, 22.5%);
+    }
+    
+    // &:focus, &:focus-within {
+    //   outline: 0.125em solid white;
+    //   outline-offset: 0.125em;
+    // }
+  }
+
+  .dropdown-content {
+
+    $gap: 0.375em;
+
+    background-color: hsl(0, 0%, 10%);
+    display: none;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0.375em;
+    border-radius: 0.5em;
+    top: calc(100% + var(--button-margin) + 0.25em);
+    left: 0;
+    right: 0;
+    gap: $gap;
+
+    .button {
+
+      @include button($secondary, $primary);
+      @include outline_hover($primary, $is-focus-within: true, $is-negative: false);
+
+      &:hover, &:focus {
+        background-color: hsl(0, 0%, 22.5%);
+      }
+
+      // &:focus, &:focus-within {
+      //   outline: 0.125em solid white;
+      //   outline-offset: 0.125em;
+      // }
+
+    }
+
+  }
+
+  &:focus, &:focus-within {
+    & > .dropdown-content {
+      display: grid;
+    }
+  }
+}

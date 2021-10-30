@@ -1,0 +1,153 @@
+@import 'src/resources/sass/colours';
+@import 'src/resources/sass/global_variables';
+@import 'src/resources/sass/inputs_buttons';
+
+.section {
+
+  transition: transform 70ms;
+  border-radius: 0.5em;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+
+  &:hover, &:focus-within {
+    transform: scale(1.025);
+  }
+
+  .section-header {
+
+    font-size: 1.125rem;
+    $height: 2.5em;
+    height: $height;
+    background-color: $secondary;
+    color: $fcolor;
+
+    &:hover {
+      filter: brightness(1.25)
+    }
+
+    h3 {
+      font-size: calc(1.17em);
+    }
+
+    .click-arrow {
+      padding: 1em;
+      transition: transform 500ms;
+      height: 1em;
+    }
+
+    .collapsible {
+      transform: rotate(90deg);
+    }
+
+  }
+
+  .section-fields {
+
+    $grid-gap: 0.5em;
+    $field-height: 2em;
+    $checkbox-size: calc(#{$field-height}*0.75);
+
+    display: grid;
+    grid-template-columns: 80%;
+    gap: $grid-gap;
+    padding: $grid-gap;
+    max-height: 100%;
+    background-color: $extra-1;
+    box-sizing: border-box;
+
+    &.collapsed {
+      display: none;
+    }
+
+    .materials-array {
+      display: grid;
+      gap: $grid-gap;
+
+      h4 {
+        margin: 0;
+      }
+
+      .button#add-material {
+        @include button;
+        
+        @include outline_hover($primary, $is-focus-within: false, $is-negative: true);
+        outline-offset: (-1em/5);
+        
+        width: max-content;
+        padding: 0.375em 2em;
+        border-radius: 0.5em;
+      }
+    }
+
+    .field-input {
+      @include outline_hover($secondary, $is-focus-within: false, $is-negative: true);
+
+      background-color: $primary;
+      height: clamp(3rem/2, $field-height, 4rem);
+      border: none;
+      font-size: clamp(1rem, 1rem, 3rem);
+      color: $f2color;
+      font-family: $font-family;
+      box-sizing: border-box;
+      border-radius: 0.5em;
+      color: $secondary;
+
+      &::selection {
+        background-color: transparent;
+      }
+
+      &[type=text], &:is(textarea) {
+        padding-left: 1ch;
+        &::selection {
+          background-color: $secondary;
+          color:white;
+        }
+      }
+      
+      &::placeholder {
+        color: $f2color;
+        font-family: $font-family;
+      }
+
+      &:invalid {
+        outline-color: red;
+        outline-width: calc(1em/6);
+      }
+      
+      &.checkbox {
+        // height: clamp(1.5rem/2, $checkbox-size, 1.5rem*2);
+        width: clamp($checkbox-size, 15rem, 15rem);
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &::after {
+          content: "";
+          height: 100%;
+          aspect-ratio: 1;
+          background-color: $highlight;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: scale(0.75);
+          border-radius: inherit;
+        }
+
+        &:active::after {
+          filter: brightness(0.9);
+          transform: scale(0.7);
+        }
+
+        &.checked::after {
+          background-color: hsl(120, 69%, 60%);
+        }
+
+      }
+
+    }
+
+  }
+  
+}
